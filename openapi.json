@@ -1,0 +1,188 @@
+{
+    "swagger": "2.0",
+    "basePath": "/api/v1",
+    "paths": {
+        "/logs/": {
+            "get": {
+                "responses": {
+                    "500": {
+                        "description": "Failed to retrieve data from Elasticsearch"
+                    },
+                    "400": {
+                        "description": "Invalid query data"
+                    },
+                    "200": {
+                        "description": "Data retrieved from Elasticsearch successfully"
+                    }
+                },
+                "operationId": "get_logs_api",
+                "parameters": [
+                    {
+                        "required": true,
+                        "in": "query",
+                        "description": "The compressed query data",
+                        "name": "q",
+                        "type": "string"
+                    }
+                ],
+                "tags": [
+                    "logs"
+                ]
+            },
+            "post": {
+                "responses": {
+                    "500": {
+                        "description": "Failed to push data to Elasticsearch"
+                    },
+                    "200": {
+                        "description": "Data pushed to Elasticsearch successfully"
+                    }
+                },
+                "operationId": "post_logs_api",
+                "parameters": [
+                    {
+                        "name": "payload",
+                        "required": true,
+                        "in": "body",
+                        "schema": {
+                            "$ref": "#/definitions/Log"
+                        }
+                    }
+                ],
+                "tags": [
+                    "logs"
+                ]
+            }
+        },
+        "/logs/{id}": {
+            "parameters": [
+                {
+                    "name": "id",
+                    "in": "path",
+                    "required": true,
+                    "type": "string"
+                }
+            ],
+            "get": {
+                "responses": {
+                    "500": {
+                        "description": "Failed to get log by id"
+                    },
+                    "404": {
+                        "description": "Log not found by id"
+                    },
+                    "200": {
+                        "description": "Log found by id"
+                    }
+                },
+                "operationId": "get_logs_by_id_api",
+                "tags": [
+                    "logs"
+                ]
+            },
+            "delete": {
+                "responses": {
+                    "500": {
+                        "description": "Failed to delete log by id"
+                    },
+                    "404": {
+                        "description": "Log not found by id"
+                    },
+                    "200": {
+                        "description": "Log deleted successfully"
+                    }
+                },
+                "operationId": "delete_logs_by_id_api",
+                "tags": [
+                    "logs"
+                ]
+            }
+        }
+    },
+    "info": {
+        "title": "REST API for Log Ingestion and Search System",
+        "version": "1.0"
+    },
+    "produces": [
+        "application/json"
+    ],
+    "consumes": [
+        "application/json"
+    ],
+    "tags": [
+        {
+            "name": "logs",
+            "description": "Log operations"
+        }
+    ],
+    "definitions": {
+        "Log": {
+            "required": [
+                "commit",
+                "level",
+                "message",
+                "resourceId",
+                "spanId",
+                "timestamp",
+                "traceId"
+            ],
+            "properties": {
+                "level": {
+                    "type": "string",
+                    "description": "The log level"
+                },
+                "message": {
+                    "type": "string",
+                    "description": "The log message"
+                },
+                "resourceId": {
+                    "type": "string",
+                    "description": "The resource id"
+                },
+                "timestamp": {
+                    "type": "string",
+                    "format": "date-time",
+                    "description": "The log timestamp"
+                },
+                "traceId": {
+                    "type": "string",
+                    "description": "The trace id"
+                },
+                "spanId": {
+                    "type": "string",
+                    "description": "The span id"
+                },
+                "commit": {
+                    "type": "string",
+                    "description": "The commit id"
+                },
+                "metadata": {
+                    "description": "The log metadata",
+                    "allOf": [
+                        {
+                            "$ref": "#/definitions/Metadata"
+                        }
+                    ]
+                }
+            },
+            "type": "object"
+        },
+        "Metadata": {
+            "properties": {
+                "parentResourceId": {
+                    "type": "string",
+                    "description": "The parent resource id"
+                }
+            },
+            "type": "object"
+        }
+    },
+    "responses": {
+        "ParseError": {
+            "description": "When a mask can't be parsed"
+        },
+        "MaskError": {
+            "description": "When any error occurs on mask"
+        }
+    }
+}

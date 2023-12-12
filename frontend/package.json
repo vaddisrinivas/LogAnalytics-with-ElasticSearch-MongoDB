@@ -1,0 +1,45 @@
+{
+  "name": "logingestquerybuilder",
+  "license": "MIT",
+  "main": "src/index.jsx",
+  "scripts": {
+    "build": "vite build --mode dev --debug",
+    "eslint": "eslint --ext .jsx --ext .js ./src/",
+    "lint": "npm run eslint",
+    "lint-fix": "eslint --ext .jsx --ext .js --fix ./src/",
+    "preview": "vite preview",
+    "start": "vite --host 0.0.0.0 --port 80"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "dependencies": {
+    "@emotion/react": "^11.11.1",
+    "@emotion/styled": "^11.11.0",
+    "@mui/base": "^5.0.0-beta.24",
+    "@mui/icons-material": "^5.14.18",
+    "@mui/material": "^5.14.18",
+    "@mui/x-data-grid": "^6.18.1",
+    "@mui/x-date-pickers": "^6.18.1",
+    "@react-awesome-query-builder/mui": "6.4.2",
+    "@vitejs/plugin-react": "^4.0.3",
+    "axios": "^1.6.2",
+    "lodash": "^4.17.21",
+    "pako": "^2.1.0",
+    "react": "^18.0.0",
+    "react-dom": "^18.0.0",
+    "react-dropzone": "^14.2.3",
+    "sass": "^1.35.0",
+    "vite": "^4.5.0"
+  },
+  "readme": "README.md"
+}
