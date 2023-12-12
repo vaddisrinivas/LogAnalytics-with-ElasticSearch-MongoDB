@@ -84,7 +84,7 @@ In its current scope some of its capabilities are -
   - Allow combining multiple filters.
   
 ## System Design
-![System Architecture and Ideation](dyte.png)
+![System Architecture and Ideation](res.png)
 ### System components
 - **Log Ingestion Service:** 
   - Responsible for receiving logs via HTTP requests.
